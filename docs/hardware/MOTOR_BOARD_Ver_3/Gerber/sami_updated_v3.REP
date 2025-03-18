@@ -1,0 +1,353 @@
+*************************************************************
+FileName = sami_updated_v3.GBR
+AutoAperture = True
+*************************************************************
+Generating : Mechanical 15
+      File : sami_updated_v3.GM15
+
+    Adding Layer      : Mechanical 15
+
+
+Used DCodes :
+    D14
+    D53
+    D55
+*************************************************************
+
+*************************************************************
+Generating : Mechanical 13
+      File : sami_updated_v3.GM13
+
+    Adding Layer      : Mechanical 13
+
+
+Used DCodes :
+    D52
+    D53
+    D54
+*************************************************************
+
+*************************************************************
+Generating : Top Component Center
+      File : sami_updated_v3.GM10
+
+    Adding Layer      : Top Component Center
+
+
+Used DCodes :
+    D53
+*************************************************************
+
+*************************************************************
+Generating : Top Assembly
+      File : sami_updated_v3.GM8
+
+    Adding Layer      : Top Assembly
+
+
+Used DCodes :
+    D13
+*************************************************************
+
+*************************************************************
+Generating : Mechanical 7
+      File : sami_updated_v3.GM7
+
+    Adding Layer      : Mechanical 7
+
+
+Used DCodes :
+    D52
+*************************************************************
+
+*************************************************************
+Generating : Mechanical 5
+      File : sami_updated_v3.GM5
+
+    Adding Layer      : Mechanical 5
+
+
+Used DCodes :
+*************************************************************
+
+*************************************************************
+Generating : Top Courtyard
+      File : sami_updated_v3.GM4
+
+    Adding Layer      : Top Courtyard
+
+
+Used DCodes :
+    D13
+*************************************************************
+
+*************************************************************
+Generating : Top 3D Body
+      File : sami_updated_v3.GM2
+
+    Adding Layer      : Top 3D Body
+
+
+Used DCodes :
+    D13
+*************************************************************
+
+*************************************************************
+Generating : Mechanical 1
+      File : sami_updated_v3.GM1
+
+    Adding Layer      : Mechanical 1
+
+
+Used DCodes :
+*************************************************************
+
+*************************************************************
+Generating : Keep-Out Layer
+      File : sami_updated_v3.GKO
+
+    Adding Layer      : Keep-Out Layer
+
+
+Used DCodes :
+    D56
+    D57
+*************************************************************
+
+*************************************************************
+Generating : Bottom Overlay
+      File : sami_updated_v3.GBO
+
+    Adding Layer      : Bottom Overlay
+
+
+Used DCodes :
+    D12
+    D14
+    D15
+*************************************************************
+
+*************************************************************
+Generating : Bottom Paste
+      File : sami_updated_v3.GBP
+
+    Adding Layer      : Bottom Paste
+
+    Adding Layer      : Bottom Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D19
+    D20
+    D50
+*************************************************************
+
+*************************************************************
+Generating : Bottom Solder
+      File : sami_updated_v3.GBS
+
+    Adding Layer      : Bottom Solder
+
+    Adding Layer      : Bottom Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D19
+    D35
+    D39
+    D40
+    D41
+    D42
+    D51
+*************************************************************
+
+*************************************************************
+Generating : Top Solder
+      File : sami_updated_v3.GTS
+
+    Adding Layer      : Top Solder
+
+    Adding Layer      : Top Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D19
+    D21
+    D22
+    D24
+    D25
+    D27
+    D29
+    D30
+    D31
+    D32
+    D33
+    D34
+    D35
+    D36
+    D37
+    D38
+    D39
+    D40
+    D41
+    D42
+*************************************************************
+
+*************************************************************
+Generating : Top Paste
+      File : sami_updated_v3.GTP
+
+    Adding Layer      : Top Paste
+
+    Adding Layer      : Top Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D16
+    D17
+    D18
+    D19
+    D20
+    D21
+    D22
+    D23
+    D24
+    D25
+    D26
+    D27
+    D28
+    D29
+    D30
+    D31
+*************************************************************
+
+*************************************************************
+Generating : Top Overlay
+      File : sami_updated_v3.GTO
+
+    Adding Layer      : Top Overlay
+
+
+Used DCodes :
+    D10
+    D11
+    D12
+    D13
+    D14
+    D15
+*************************************************************
+
+*************************************************************
+Generating : Top Pad Master
+      File : sami_updated_v3.GPT
+
+    Adding Layer      : Top Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D16
+    D17
+    D18
+    D19
+    D20
+    D21
+    D22
+    D23
+    D24
+    D25
+    D26
+    D27
+    D28
+    D29
+    D30
+    D31
+    D46
+    D47
+    D48
+*************************************************************
+
+*************************************************************
+Generating : Bottom Pad Master
+      File : sami_updated_v3.GPB
+
+    Adding Layer      : Bottom Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D19
+    D20
+    D46
+    D47
+    D48
+    D50
+*************************************************************
+
+*************************************************************
+Generating : Bottom Layer
+      File : sami_updated_v3.GBL
+
+    Adding Layer      : Bottom Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D14
+    D19
+    D20
+    D44
+    D46
+    D47
+    D48
+    D49
+    D50
+*************************************************************
+
+*************************************************************
+Generating : Top Layer
+      File : sami_updated_v3.GTL
+
+    Adding Layer      : Top Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D14
+    D16
+    D17
+    D18
+    D19
+    D20
+    D21
+    D22
+    D23
+    D24
+    D25
+    D26
+    D27
+    D28
+    D29
+    D30
+    D31
+    D43
+    D44
+    D45
+    D46
+    D47
+    D48
+    D49
+*************************************************************
+

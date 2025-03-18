@@ -1,0 +1,35 @@
+Altium Designer Pick and Place Locations
+C:\Users\mikha\OneDrive\Desktop\motor_board_clara_v4\Pick Place\Pick Place for sami_updated_v3.txt
+
+========================================================================================================================
+File Design Information:
+
+Date:       14/07/22
+Time:       10:26
+Revision:   Not in VersionControl
+Variant:    No variations
+Units used: mil
+
+Designator Comment                               Layer       Footprint                 Center-X(mil) Center-Y(mil) Rotation Description                                                                                                  
+""         Component_1                           TopLayer    UART_Header_Pins          51.000        520.370       0        ""                                                                                                           
+R3         "ERA3APB122V 1.2K OHM"                TopLayer    RESC1608X55X30ML20T20     552.000       565.000       0        ""                                                                                                           
+MD1        MD9927                                TopLayer    MD9927                    623.000       452.472       180      ""                                                                                                           
+Z1         ZXCT1010E5TA                          TopLayer    ZXCT1010E5TA              684.244       552.402       90       ""                                                                                                           
+PM         "Poluou motor"                        TopLayer    PCBComponent_1            663.000       121.000       180      ""                                                                                                           
+6Pin       "6 Pin Contact Pad"                   BottomLayer 6PinContactPad            228.000       91.000        90       ""                                                                                                           
+J2         "S5B-ZR-SM4A-TF (LF) (SN)"            TopLayer    CONN_S5B-ZR-SM4A-TF_JST   995.811       291.001       270      "No Description Available"                                                                                   
+J1         "S5B-ZR-SM4A-TF (LF) (SN)"            BottomLayer CONN_S5B-ZR-SM4A-TF_JST   995.811       290.945       90       "No Description Available"                                                                                   
+C8         "GRM155R71C104KA88D - 0.1 uF - 16V"   TopLayer    FP-GRM15-MFG              506.252       481.000       0        "CAP CER 0.1UF 16V X7R 0402"                                                                                 
+C7         "GRM21BR61E106KA73L - 10 uF -25V"     TopLayer    FP-GRM21B-0_15-IPC_C      42.000        378.592       90       "Chip Multilayer Ceramic Capacitors for General Purpose, 0805, 10uF, X5R, 15%, 10%, 25V"                     
+R2         "ERJ-1GNF1002C - 10kOhm 1/20 W"       TopLayer    FP-ERJ1G-MFG              448.189       568.000       0        "RES SMD 10K OHM 1% 1/20W 0201"                                                                              
+C6         "GRM155R71C104KA88D - 0.1 uF - 16V"   TopLayer    FP-GRM15-MFG              42.000        292.748       270      "CAP CER 0.1UF 16V X7R 0402"                                                                                 
+C5         "GRM155R71C104KA88D - 0.1 uF - 16V"   TopLayer    FP-GRM15-MFG              502.000       404.748       270      "CAP CER 0.1UF 16V X7R 0402"                                                                                 
+U3         ATmega328P-AU                         TopLayer    32A_L                     281.614       406.764       0        "8-bit AVR Microcontroller, 32KB Flash, 1KB EEPROM, 2KB SRAM, 32-pin TQFP, Industrial Grade (-40°C to 85°C)" 
+R1         "RL1220S-R50-F - 0.5 Ohm 1/3W"        TopLayer    RESC2013X50X40NL20T20     826.001       471.000       180      ""                                                                                                           
+Y1         "CSTNE16M0V53C000R0 - 16 MHz Crystal" TopLayer    FP-CSTNE16M0V53C000R0-MFG 51.000        198.000       270      "CERAMIC RES 16.0000MHZ 15PF SMD"                                                                            
+HE2        TLE4946-2K                            TopLayer    INF-PG-SC59_M             755.630       310.630       225      "High Precision Hall Effect Latch, PG-SC59, Reel, Green"                                                     
+HE1        TLE4946-2K                            TopLayer    INF-PG-SC59_M             569.370       310.630       315      "High Precision Hall Effect Latch, PG-SC59, Reel, Green"                                                     
+C4         "GRM155R71C104KA88D - 0.1 uF - 16V"   TopLayer    FP-GRM15-MFG              726.000       441.000       270      "CAP CER 0.1UF 16V X7R 0402"                                                                                 
+C3         "GRM155R71C104KA88D - 0.1 uF - 16V"   TopLayer    FP-GRM15-MFG              859.000       560.000       270      "CAP CER 0.1UF 16V X7R 0402"                                                                                 
+C2         "GRM155R71C104KA88D - 0.1 uF - 16V"   TopLayer    FP-GRM15-MFG              788.000       569.000       180      "CAP CER 0.1UF 16V X7R 0402"                                                                                 
+C1         "GRM155R71C104KA88D - 0.1 uF -16V"    TopLayer    FP-GRM15-MFG              444.252       237.000       90       "CAP CER 0.1UF 16V X7R 0402"                                                                                 

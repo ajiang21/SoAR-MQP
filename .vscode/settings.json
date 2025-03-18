@@ -1,0 +1,13 @@
+{
+    "cmake.configureOnOpen": false,
+    "cmake.sourceDirectory": "${workspaceFolder}/simulation/salamander-3d-trial/3D_ver5",
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+    "python.formatting.provider": "none",
+    "C_Cpp.errorSquiggles": "enabled",
+    "files.associations": {
+        "queue": "cpp",
+        "functional": "cpp"
+    }
+}
