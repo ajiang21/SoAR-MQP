@@ -29,6 +29,8 @@ const int MOTOR_NUM = sizeof(motors) / sizeof(motors[0]);
 int high_time_lower = 980; // low: 879 high: 2139 for high time
 int high_time_upper = 2020;
 
+float last_val = 0; // Stored last PWM high time
+
 // Struct for storing the Motor Values
 struct MValues
 {
@@ -102,7 +104,7 @@ MValues BendDirection(float bend_val, float bend_dir)
   result.M1 = (SPINE_LENGTH_MAX + (bend_val)*SPINE_R * cos(2 * PI / 6 - bend_dir)) * INCH_TICS;
   result.M2 = (SPINE_LENGTH_MAX - abs(bend_val) * SPINE_R * cos(bend_dir)) * INCH_TICS;
   result.M3 = (SPINE_LENGTH_MAX - abs(bend_val) * SPINE_R * cos(2 * PI / 3 - bend_dir)) * INCH_TICS;
-  result = CheckMin(result, 120);
+  result = CheckMin(result, 120); // remove minimum margin
   return result;
 }
 
@@ -129,7 +131,6 @@ MValues HorizontalBend(float bend_val)
   result = BendDirection(bend_val, beta);
   return result;
 }
-
 
 MValues Squeeze(float squeeze_val)
 {
@@ -179,7 +180,9 @@ void anti_stall(int motorIndex, int32_t targetPos, int MIN)
   Serial.print(" Position: ");
   Serial.println(current_pos);
 
-  if (abs(targetPos - current_pos) < MIN){
+  if (abs(targetPos - current_pos) < MIN)
+  {
+    Serial.println(" Set motor stop ");
     motors[motorIndex].set_rpm(0);
   }
 }
@@ -218,7 +221,7 @@ void spine_control_mix(MValues mval1, MValues mval2, MValues mval3)
   int M3_tics = mix_values(mval1.M3, mval2.M3, mval3.M3);
 
   Serial.print(M1_tics);
-  Serial.print(" "); // Add space between values
+  Serial.print(" ");
   Serial.print(M2_tics);
   Serial.print(" ");
   Serial.println(M3_tics);
@@ -244,7 +247,6 @@ void spine_control(MValues mval1)
 void loop()
 {
   float hori_val = readPWMValue(HORZ_INPUT_PIN, -MAX_HORZ, MAX_HORZ);
-
   Serial.print("hori_val");
   Serial.println(hori_val);
 
@@ -257,5 +259,15 @@ void loop()
   Serial.print(" ");
   Serial.println(hori_mval.M3);
 
-  spine_control(hori_mval);
+  if (abs(hori_val - last_val) < 0.02)
+  {
+    anti_stall(0, hori_mval.M1, 100);
+    anti_stall(1, hori_mval.M2, 100);
+    anti_stall(2, hori_mval.M3, 100);
+  }
+  else
+  {
+    spine_control(hori_mval);
+    last_val = hori_val;
+  }
 }
