@@ -2,12 +2,13 @@
 #include <Wire.h>
 #include <smartmotor.h>
 
-#define HORZ_INPUT_PIN 2 // Connect the PWM signal
+#define HORZ_INPUT_PIN 4 // Connect the PWM signal 2 for xiao
 #define VERT_INPUT_PIN 3 // Connect the PWM signal
 #define SQUZ_INPUT_PIN 1 // Connect the PWM signal
 
 #define SPINE_LENGTH_MAX 9 // Spine max length
 #define SPINE_LENGTH_MIN 7 // Spine min length
+#define SPINE_LENGTH 8 // Spine min length
 
 float SPINE_WIDTH = 2.5;                                               // Spine width
 float SPINE_HEIGHT = 2.16;                                             // Spine height
@@ -101,10 +102,13 @@ MValues CheckMin(MValues mval, int minval)
 MValues BendDirection(float bend_val, float bend_dir)
 {
   MValues result;
-  result.M1 = (SPINE_LENGTH_MAX + (bend_val)*SPINE_R * cos(2 * PI / 6 - bend_dir)) * INCH_TICS;
-  result.M2 = (SPINE_LENGTH_MAX - abs(bend_val) * SPINE_R * cos(bend_dir)) * INCH_TICS;
-  result.M3 = (SPINE_LENGTH_MAX - abs(bend_val) * SPINE_R * cos(2 * PI / 3 - bend_dir)) * INCH_TICS;
-  result = CheckMin(result, 120); // remove minimum margin
+  //S1 = (SPINE_LENGTH + (bend_val) * SPINE_R * cos(2 * PI / 6 - bend_dir));
+  //S2 = (SPINE_LENGTH - (bend_val) * SPINE_R * cos(bend_dir));
+  //S3 = (SPINE_LENGTH - (bend_val) * SPINE_R * cos(2 * PI / 3 - bend_dir));
+  result.M1 = bend_val * SPINE_R * cos(2 * PI / 6 - bend_dir) * INCH_TICS;
+  result.M2 = - bend_val * SPINE_R * cos(bend_dir) * INCH_TICS;
+  result.M3 = - bend_val * SPINE_R * cos(2 * PI / 3 - bend_dir) * INCH_TICS;
+  //result = CheckMin(result, 120); // remove minimum margin
   return result;
 }
 
@@ -128,7 +132,7 @@ MValues HorizontalBend(float bend_val)
     // TODO: set error flag
     return result;
   }
-  result = BendDirection(bend_val, beta);
+  result = BendDirection(abs(bend_val), beta);
   return result;
 }
 
@@ -264,10 +268,12 @@ void loop()
     anti_stall(0, hori_mval.M1, 100);
     anti_stall(1, hori_mval.M2, 100);
     anti_stall(2, hori_mval.M3, 100);
+    Serial.println("anti stall is here");
   }
   else
   {
     spine_control(hori_mval);
     last_val = hori_val;
+    Serial.println("turning motors");
   }
 }
