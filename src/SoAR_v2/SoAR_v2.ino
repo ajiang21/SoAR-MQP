@@ -54,6 +54,12 @@ void setup()
   motors[1].reset();
   motors[2].reset();
   // TODO: Initi function
+  controlMotor(0, -INCH_TICS);
+  controlMotor(1, -INCH_TICS);
+  controlMotor(2, -INCH_TICS);
+  motors[0].reset();
+  motors[1].reset();
+  motors[2].reset();
 }
 
 float fmap(float x, float in_min, float in_max, float out_min, float out_max)
@@ -252,7 +258,9 @@ void loop()
 {
   float hori_val = readPWMValue(HORZ_INPUT_PIN, -MAX_HORZ, MAX_HORZ);
   Serial.print("hori_val");
-  Serial.println(hori_val);
+  Serial.print(hori_val);
+  Serial.print("   last val");
+  Serial.println(last_val);
 
   MValues hori_mval = HorizontalBend(hori_val);
 
@@ -265,9 +273,9 @@ void loop()
 
   if (abs(hori_val - last_val) < 0.02)
   {
-    anti_stall(0, hori_mval.M1, 100);
-    anti_stall(1, hori_mval.M2, 100);
-    anti_stall(2, hori_mval.M3, 100);
+    anti_stall(0, -hori_mval.M1, 100);
+    anti_stall(1, -hori_mval.M2, 100);
+    anti_stall(2, -hori_mval.M3, 100);
     Serial.println("anti stall is here");
   }
   else
