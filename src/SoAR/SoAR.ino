@@ -2,7 +2,7 @@
 #include <Wire.h>
 #include <smartmotor.h>
 
-#define HORZ_INPUT_PIN 2  // Connect the PWM signal
+#define HORZ_INPUT_PIN 4  // Connect the PWM signal, 2 for xiao
 #define VERT_INPUT_PIN 3  // Connect the PWM signal
 #define SQUZ_INPUT_PIN 1  // Connect the PWM signal
 
@@ -10,9 +10,9 @@
 #define SPINE_LENGTH_MIN 7 // Spine min length
 float SPINE_WIDTH = 2.5; // Spine width
 float SPINE_HEIGHT = 2.16; // Spine height
-float SPINE_R = 1.44 // Spine Radius
+float SPINE_R = 1.44; // Spine Radius
 int INCH_TICS = 2140; // 1 inch to encoder ticks
-float MAX_HORZ = (SPINE_LENGTH_MAX - SPINE_LENGTH_MIN)/SPINE_WIDTH; // Maximum bending angle in R for horizontal bend
+float MAX_HORZ = (SPINE_LENGTH_MAX - SPINE_LENGTH_MIN)/SPINE_WIDTH - 0.05; // Maximum bending angle in R for horizontal bend
 float MAX_VERT = (SPINE_LENGTH_MAX - SPINE_LENGTH_MIN)/SPINE_HEIGHT; // Maximum bending angle in R for vertical bend
 float MAX_SQUZ = SPINE_LENGTH_MAX - SPINE_LENGTH_MIN; // Maximum contraction length for squeezing
 
@@ -110,13 +110,13 @@ MValues BendDirection(float bend_val, int bend_dir) {
 MValues HorizontalBend(float bend_val) {
   MValues result;
   if (bend_val > 0){
+    result.M1 = abs(bend_val) * (SPINE_WIDTH) * INCH_TICS;
+    result.M2 = abs(bend_val) * (SPINE_WIDTH/2) * INCH_TICS;;
+    result.M3 = 0;
+  }else{
     result.M1 = 0;
     result.M2 = abs(bend_val) * (SPINE_WIDTH/2) * INCH_TICS;
-    result.M3 = abs(bend_val) * SPINE_WIDTH * INCH_TICS;
-  }else{
-    result.M1 = abs(bend_val) * SPINE_WIDTH * INCH_TICS;
-    result.M2 = abs(bend_val) * (SPINE_WIDTH/2) * INCH_TICS;
-    result.M3 = 0;
+    result.M3 = abs(bend_val) * (SPINE_WIDTH) * INCH_TICS;
   }
   result = CheckMin(result,100);
   return result;
@@ -124,10 +124,14 @@ MValues HorizontalBend(float bend_val) {
 
 MValues VerticalBend(float bend_val){
   MValues result = {0,0,0};
-  if (bend_val > 1){
+  if (bend_val > 0){
     result.M1 = 0;
-    result.M2 = bend_val * SPINE_HEIGHT * INCH_TICS;
+    result.M2 = abs(bend_val) * SPINE_HEIGHT * INCH_TICS;
     result.M3 = 0;
+  }else{
+    result.M1 = abs(bend_val) * SPINE_HEIGHT * INCH_TICS;
+    result.M2 = 0;
+    result.M3 = abs(bend_val) * SPINE_HEIGHT * INCH_TICS;
   }
   result = CheckMin(result,120);
   return result;
@@ -202,7 +206,7 @@ void spine_control(MValues mval1, MValues mval2, MValues mval3){
 
 void loop() {
   float hori_val = readPWMValue(HORZ_INPUT_PIN, -MAX_HORZ, MAX_HORZ);
-  //float vert_val = readPWMValue(VERT_INPUT_PIN, -MAX_VERT, MAX_VERT);
+  //vert_val = readPWMValue(VERT_INPUT_PIN, -MAX_VERT, MAX_VERT);
   //float squz_val = readPWMValue(SQUZ_INPUT_PIN, -MAX_SQUZ, MAX_SQUZ);
   float vert_val = 0;
   float squz_val = 0;
@@ -231,7 +235,7 @@ void loop() {
 //  Serial.print(vert_mval.M2);
 //  Serial.print(" ");
 //  Serial.println(vert_mval.M3);
-//
+
 //  Serial.print("Squz Val ");
 //  Serial.print(squz_mval.M1);
 //  Serial.print(" "); 

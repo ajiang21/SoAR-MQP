@@ -2,8 +2,8 @@
 #include <Wire.h>
 #include <smartmotor.h>
 
-#define HORZ_INPUT_PIN 4 // Connect the PWM signal 2 for xiao
-#define VERT_INPUT_PIN 3 // Connect the PWM signal
+#define HORZ_INPUT_PIN 3 // Connect the PWM signal 3 for xiao
+#define VERT_INPUT_PIN 2 // Connect the PWM signal
 #define SQUZ_INPUT_PIN 1 // Connect the PWM signal
 
 #define SPINE_LENGTH_MAX 9 // Spine max length
@@ -45,8 +45,8 @@ void setup()
   Serial.begin(115200);
   Wire.begin(); // INIT DEVICE AS I2C CONTROLLER
   pinMode(HORZ_INPUT_PIN, INPUT);
-  // pinMode(VERT_INPUT_PIN, INPUT);
-  // pinMode(SQUZ_INPUT_PIN, INPUT);
+  pinMode(VERT_INPUT_PIN, INPUT);
+  pinMode(SQUZ_INPUT_PIN, INPUT);
   motors[0].tune_pos_pid(0.9, 0.01, 0.005);
   motors[1].tune_pos_pid(0.9, 0.01, 0.005);
   motors[2].tune_pos_pid(0.9, 0.01, 0.005);
@@ -88,15 +88,15 @@ float readPWMValue(int PWM_INPUT_PIN, float map_val_lower, float map_val_higher)
 
 MValues CheckMin(MValues mval, int minval)
 {
-  if (mval.M1 < minval)
+  if (abs(mval.M1) < minval)
   {
     mval.M1 = 0;
   }
-  if (mval.M2 < minval)
+  if (abs(mval.M2) < minval)
   {
     mval.M2 = 0;
   }
-  if (mval.M3 < minval)
+  if (abs(mval.M3) < minval)
   {
     mval.M3 = 0;
   }
@@ -114,7 +114,7 @@ MValues BendDirection(float bend_val, float bend_dir)
   result.M1 = bend_val * SPINE_R * cos(2 * PI / 6 - bend_dir) * INCH_TICS;
   result.M2 = - bend_val * SPINE_R * cos(bend_dir) * INCH_TICS;
   result.M3 = - bend_val * SPINE_R * cos(2 * PI / 3 - bend_dir) * INCH_TICS;
-  //result = CheckMin(result, 120); // remove minimum margin
+  result = CheckMin(result, 100); // remove minimum margin
   return result;
 }
 
@@ -161,12 +161,12 @@ void controlMotor(int motorIndex, int32_t targetPos)
   Serial.print(motors[motorIndex].get_address());
 
   Serial.print(" Target position: ");
-  Serial.print(targetPos);
+  Serial.println(targetPos);
 
   uint8_t status = motors[motorIndex].set_position(targetPos);
 
-  // Serial.print("Status: ");
-  // Serial.println(status);
+  Serial.print(" Status: ");
+  Serial.print(status);
 
   // Check if the command was successful
   if (status < 1)
@@ -192,8 +192,10 @@ void anti_stall(int motorIndex, int32_t targetPos, int MIN)
 
   if (abs(targetPos - current_pos) < MIN)
   {
-    Serial.println(" Set motor stop ");
-    motors[motorIndex].set_rpm(0);
+    Serial.println("Set motor stop ");
+    uint8_t status = motors[motorIndex].set_position(current_pos);
+    Serial.print("Status: ");
+    Serial.println(status);
   }
 }
 
@@ -250,12 +252,13 @@ void spine_control(MValues mval1)
   Serial.println(mval1.M3);
 
   controlMotor(0, -mval1.M1);
-  controlMotor(1, -mval1.M2);
+  //controlMotor(1, -mval1.M2);
   controlMotor(2, -mval1.M3);
 }
 
 void loop()
 {
+ 
   float hori_val = readPWMValue(HORZ_INPUT_PIN, -MAX_HORZ, MAX_HORZ);
   Serial.print("hori_val");
   Serial.print(hori_val);
@@ -273,10 +276,10 @@ void loop()
 
   if (abs(hori_val - last_val) < 0.02)
   {
-    anti_stall(0, -hori_mval.M1, 100);
-    anti_stall(1, -hori_mval.M2, 100);
-    anti_stall(2, -hori_mval.M3, 100);
-    Serial.println("anti stall is here");
+    anti_stall(0, -hori_mval.M1, 80);
+    anti_stall(1, -hori_mval.M2, 80);
+    anti_stall(2, -hori_mval.M3, 80);
+    Serial.println("im here");
   }
   else
   {

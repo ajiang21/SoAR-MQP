@@ -10,7 +10,7 @@ const int32_t ENCODER_TICKS_PER_SHAFT_REV= ENCODER_TICKS_PER_REV * GEAR_RATIO;
 #define DELAY_PERIOD 5000
 
 // INIT SMART MOTORS
-SmartMotor motors[] = {0x04,0x05,0x06}; // INIT MOTOR W/ DEFAULT ADDRESS
+SmartMotor motors[] = {0x04,0x05,0x06,0x0A}; // INIT MOTOR W/ DEFAULT ADDRESS
 const int MOTOR_NUM = sizeof(motors)/sizeof(motors[0]);
 
 void setup() {
